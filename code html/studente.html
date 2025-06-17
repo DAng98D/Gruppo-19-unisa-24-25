@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Portale Studente</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f8f8;
+    }
+
+    .page {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .centered {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #3e9e44;
+    }
+
+    .menu button {
+      margin: 5px 0;
+    }
+
+    .logout {
+      background: #b71c1c;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #e0e0e0;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    nav button {
+      flex: 1;
+      margin: 0 5px;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Login Page -->
+<!-- Login Page -->
+<div class="page active" id="loginPage">
+  <div class="centered">
+    <materiale figma ium src="logo.png" alt="Logo Portale Studente" style="display:block; margin: 0 auto 20px; max-width: 150px;">
+    <h2>Login Studente</h2>
+    <input type="text" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="handleLogin()">Accedi</button>
+    <p id="loginError" style="color:red;"></p>
+  </div>
+</div>
+
+
+<!-- Dashboard -->
+<div class="page" id="dashboardPage">
+  <div class="centered">
+    <h2>Dashboard Studente</h2>
+    <div class="menu">
+      <button onclick="showPage('votiPage')">Voti</button>
+      <button onclick="showPage('compitiPage')">Compito in classe</button>
+      <button onclick="showPage('assenzePage')">Assenze e ritardi</button>
+      <button onclick="showPage('chatPage')">Chat con i compagni</button>
+      <button class="logout" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- Voti -->
+<div class="page" id="votiPage">
+  <div class="centered">
+    <h2>Voti</h2>
+    <p>Matematica: 7</p>
+    <p>Italiano: 6</p>
+    <p>Storia: 8</p>
+    <button onclick="showPage('dashboardPage')">Indietro</button>
+  </div>
+</div>
+
+<!-- Compito -->
+<div class="page" id="compitiPage">
+  <div class="centered">
+    <h2>Compito in Classe</h2>
+    <p>Data: 01/06/2025</p>
+    <p>Materia: Matematica</p>
+    <p>Esito: 6.5</p>
+    <button onclick="showPage('dashboardPage')">Indietro</button>
+  </div>
+</div>
+
+<!-- Assenze -->
+<div class="page" id="assenzePage">
+  <div class="centered">
+    <h2>Assenze e Ritardi</h2>
+    <p>Totale Assenze: 3</p>
+    <p>Totale Ritardi: 1</p>
+    <button onclick="showPage('dashboardPage')">Indietro</button>
+  </div>
+</div>
+
+<!-- Chat -->
+<div class="page" id="chatPage">
+  <div class="centered">
+    <h2>Chat</h2>
+    <p>Nessuna conversazione disponibile</p>
+    <button onclick="showPage('dashboardPage')">Indietro</button>
+  </div>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function handleLogin() {
+    const email = document.getElementById("loginEmail").value;
+    const pass = document.getElementById("loginPassword").value;
+    if (email === "studente@example.com" && pass === "1234") {
+      showPage("dashboardPage");
+    } else {
+      document.getElementById("loginError").textContent = "Credenziali errate.";
+    }
+  }
+
+  function logout() {
+    showPage("loginPage");
+    document.getElementById("loginEmail").value = "";
+    document.getElementById("loginPassword").value = "";
+    document.getElementById("loginError").textContent = "";
+  }
+</script>
+
+</body>
+</html>

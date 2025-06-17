@@ -1,0 +1,11 @@
+Email: genitore@example.com
+
+Password: 1234
+
+Email: studente@example.com
+
+Password: 1234
+
+Email: docente@example.com
+
+Password: abcd

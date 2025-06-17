@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Portale Docente</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    .page {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .centered {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #00796B;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #004d40;
+    }
+
+    .logout {
+      background: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login Page -->
+<div class="page active" id="loginPage">
+  <div class="centered">
+    <img src="logo.png" alt="Logo" style="display:block; margin:auto; max-width:150px;">
+    <h2>Login Docente</h2>
+    <input type="text" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="handleLogin()">Accedi</button>
+    <p id="loginError" style="color:red;"></p>
+  </div>
+</div>
+
+<!-- Dashboard Docente -->
+<div class="page" id="dashboardPage">
+  <div class="centered">
+    <h2>Benvenuto, Docente</h2>
+    <button onclick="showPage('studentiPage')">Visualizza Studenti</button>
+    <button onclick="showPage('votiPage')">Inserisci Voti</button>
+    <button onclick="showPage('messaggiPage')">Messaggi da Genitori</button>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<!-- Studenti -->
+<div class="page" id="studentiPage">
+  <div class="centered">
+    <h3>Studenti della classe</h3>
+    <ul>
+      <li>Mario Rossi</li>
+      <li>Lucia Bianchi</li>
+      <li>Giulia Verdi</li>
+    </ul>
+    <button onclick="showPage('dashboardPage')">Indietro</button>
+  </div>
+</div>
+
+<!-- Voti -->
+<div class="page" id="votiPage">
+  <div class="centered">
+    <h3>Inserisci Voto</h3>
+    <input type="text" placeholder="Nome Studente">
+    <input type="number" placeholder="Voto (1-10)">
+    <button>Salva</button>
+    <button onclick="showPage('dashboardPage')">Indietro</button>
+  </div>
+</div>
+
+<!-- Messaggi -->
+<div class="page" id="messaggiPage">
+  <div class="centered">
+    <h3>Messaggi da Genitori</h3>
+    <p><strong>Genitore di Mario:</strong> Vorrei un colloquio, grazie.</p>
+    <p><strong>Genitore di Giulia:</strong> Ha recuperato l’interrogazione?</p>
+    <button onclick="showPage('dashboardPage')">Indietro</button>
+  </div>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function handleLogin() {
+    const email = document.getElementById("loginEmail").value;
+    const pass = document.getElementById("loginPassword").value;
+
+    if (email === "docente@example.com" && pass === "abcd") {
+      showPage("dashboardPage");
+    } else {
+      document.getElementById("loginError").textContent = "Credenziali errate.";
+    }
+  }
+
+  function logout() {
+    showPage("loginPage");
+    document.getElementById("loginEmail").value = "";
+    document.getElementById("loginPassword").value = "";
+    document.getElementById("loginError").textContent = "";
+  }
+</script>
+
+</body>
+</html>
